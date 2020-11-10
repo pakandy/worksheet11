@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Program: example1.html -->
+<!-- Author: Andy Pak, Sheridan College -->
+<!-- Date: Nov, 2020 -->
+<!-- Program to valid Form Inputs -->
+<html lang='en'>
+<head>
+	<title>Example 2</title>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+	<style>
+		form { border: 1px solid black; padding: 1em; }
+		td { padding: 0.5em; }
+		label, input { margin: 0.25em; }
+		input:focus { background-color:rgb(215, 236, 171); }
+	</style>
+</head>
+<body>
+	<form name='intro' id='intro' method='get' action='xxx.php' onSubmit='return validate()'>
+		<label for='firstName'>Enter First Name: </label>
+		<input name='firstName' id='firstName' type='text' value='John'><br>
+		<label for='lastName'>Enter Last Name: </label>
+		<input name='lastName' id='lastName' type='text' value='Doe'><br>
+		<label for='phone'>Enter Phone:  </label>
+		<input name='phone' id='phone' type='number' value='9058889999'><br>
+		<input type='submit' value='Press to continue'>
+	</form><hr>
+	<p id='output'></p>
+
+	<script>
+		function validate() {
+			/* Get reference for output */
+			temp = document.getElementById('output');
+			
+			/* Get reference for first name, last name, and phone */
+			form = document.getElementById('intro');
+			fName = document.getElementById('firstName');
+			lName = document.getElementById('lastName');
+			phone = document.getElementById('phone');
+
+			/* display values of first name, last name, and phone to output */
+			temp.innerHTML = 'First Name: ' + fName.value + '<br>';
+			temp.innerHTML += 'Last Name: ' + lName.value + '<br>';
+			temp.innerHTML += 'Phone: ' + phone.value + '<br>';
+
+			if (fName.value === 'go') {
+          return true;
+        }
+        else if (fName.value !== 'Andy') {
+          output.innerHTML += '&lt;br&gt;First name is not Andy';
+          fName.focus();
+        }
+			
+			return false; /* must be false to stay on client-side */
+		}
+	</script>
+
+	</body>
+</html>
+

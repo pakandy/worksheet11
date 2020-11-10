@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- Program: example1b.html -->
+<!-- Author: Andy Pak, Sheridan College -->
+<!-- Date: Nov, 2020 -->
+<!-- Program to valid Form Inputs -->
+<html lang="en">
+<head>
+	<title>Example 2</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<style>
+		form { border: 1px solid black; padding: 1em; }
+		td { padding: 0.5em; }
+		label, input { margin: 0.25em; }
+	</style>
+</head>
+<body>
+	<form name="intro" method="get" onSubmit="return validate()">
+		<label for='firstName'>Enter First Name: </label>
+		<input name="firstName" id="firstName" type="text" value="John"><br>
+		<label for='lastName'>Enter Last Name: </label>
+		<input name="lastName" id="lastName" type="text" value="Doe"><br>
+		<label for='phone'>Enter Phone:  </label>
+		<input name="phone" id="phone" type="number" value="9058889999"><br>
+		<input type="submit" value="Press to continue">
+	</form><hr>
+	<table border="1">
+		<tr><th>ID output</th>
+		 <td><section id="outputName"></section></td>
+		 <td>Unique ID</td></tr>
+		   
+		<tr><th>First class output</th>
+		 <td><section class="outputClass"></section></td>
+		   <td rowspan="2">Both of these are using the same class so both will be filled in 
+		 even though one is a section and the other a paragraph</td></tr>
+		   
+		<tr><th>Second class output</th>
+		 <td><p class="outputClass"></section></td></tr>
+		   
+		<tr><th>First tag output</th>
+		 <td><div></div></td>
+		 <td rowspan="3">All these output areas are <div>s so all will contain output</td></tr>
+		   
+		<tr><th>Second tag output</th>
+		 <td><div></div></td></tr>
+		   
+		<tr><th>Third tag output</th>
+		 <td><div></div></td></tr>
+	</table>
+
+	<script>
+		function validate() {
+			/* Get reference for unique ID */
+			temp = document.getElementById("outputName");
+			/* Follows DOM through page to get the data in specified input box;
+			.innerHTML updates the content of an element */
+			temp.innerHTML = document.intro.firstName.value;
+
+			/* Get references for all elements using the class "outputClass" */
+			temp = document.getElementsByClassName("outputClass");
+			/* Since the returning value is an array of references, 
+				a for or foreach is used to traverse the array */
+			for (x = 0; x < temp.length; x++) {
+				temp[x].innerHTML = document.intro.lastName.value; 
+			}	
+
+			/* Get references for all <div> elements */		
+			temp = document.getElementsByTagName("div");
+			/* Since the returning value is an array of references, 
+				a for or foreach is used to traverse the array */
+			for (x=0; x < temp.length; x++) {
+				temp[x].innerHTML = document.intro.phone.value; 
+			}
+
+			return false; /* must be false to stay on client-side */
+		}
+	</script>
+
+	</body>
+</html>
+
