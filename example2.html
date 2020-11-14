@@ -10,25 +10,29 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 	<style>
 		form { border: 1px solid black; padding: 1em; }
-		input[type=text] { background-color: lightgray; }
+		input[type=text], input[type=email] { background-color: lightgray; }
 		input[type=number] { background-color: lightblue; }
-		input[type=text]:valid, input[type=email]:valid, input[type=number] { background-color:rgb(215, 236, 171); }
+		input[type=text]:valid, input[type=email]:valid, input[type=number]:valid { background-color:rgb(215, 236, 171); }
+		input:invalid { outline-color: rgb(231, 159, 159); }
 		input:out-of-range { background-color: rgb(235, 84, 84); }
 		.red { color: red; }	
 		.blue { color: blue; }	
+
 	</style>
 </head>
 <body>
 	<h2>Example 2</h2>
 	<form onsubmit='return checkAll();'>
-	<p><label for='id1'>Enter a number (100-300)&nbsp;&nbsp;&nbsp;</label>
+	<p><label for='id1'>Number (100-300)</label>&nbsp;&nbsp;&nbsp;
 	<input id='id1' type='number' min='100' max='300' required autofocus >&nbsp;&nbsp;
 	Required (number between 100 and 300 inclusive)</p>
-	<p><label for='id2'>Enter text&nbsp;&nbsp;&nbsp;</label>
-	<input id='id2' type='text' minlength='3' maxlength='5' required>&nbsp;&nbsp;Required (minlengh 3, maxlength 5)</p>
-	<p><label for='id3'>Enter text&nbsp;&nbsp;&nbsp;</label>
-	<input id='id3' type='text' pattern='[0-9]{3}' placeholder='###' required>&nbsp;&nbsp;Required [0-9]{3}</p>
-	<p><label for='id4'>Enter email&nbsp;&nbsp;&nbsp;</label>
+	<p><label for='id2'>Text</label>&nbsp;&nbsp;&nbsp;
+	<input id='id2' type='text' minlength='3' maxlength='5' required>&nbsp;&nbsp;
+					Required (minlengh 3, maxlength 5)</p>
+	<p><label for='id3'>Postal Code</label>&nbsp;&nbsp;
+	<input id='id3' type='text' pattern='[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]' placeholder='L1L2L3' 
+					required>&nbsp;&nbsp;Required (Postal Code)</p>
+	<p><label for='id4'>Email</label>&nbsp;&nbsp;&nbsp;
 	<input id='id4' type='email' placeholder='abc@xxx.ca' required>&nbsp;&nbsp;Required (Email)</p>
 		
 	<p><button onclick='checkAll()'>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -36,46 +40,47 @@
 	</form><br><br>
 
 	<span class='red'><b>validationMessage:</b></span>
-	<p id='out' style='border: solid 1px black; padding: 5px 0 10px 10px; '></p>
+	<p id='output' style='border: solid 1px black; padding: 5px 0 10px 10px; '></p>
 
 	<script>
+	
 	function checkAll() {
-		var good=0;
-		console.clear();
-		document.getElementById('out').innerHTML='';
+		var good=0;											/* initialize the counter */
+		console.clear();									/* clear the console */
+		document.getElementById('output').innerHTML='';		/* clear the output display */
 
-		/* loop through all four inputs */
-		for (var x=1; x<5; x++) {
-			/* return reference of the input element */
-			var inpObj = document.getElementById('id'+x);
-
-			/* if found invalid */
-			if (!inpObj.checkValidity()) {
-				/* display the element/object to console */
-				console.dir(inpObj);
+		for (var x=1; x<5; x++) {							/* loop through all four inputs */
+			var inpObj = document.getElementById('id'+x);	/* return reference of the input element */
+			if (!inpObj.checkValidity()) {					/* found invalid */
+				console.dir(inpObj);						/* display the element/object to console */
 				
-				/* set customer validation message (optional) */
-//				inpObj.setCustomValidity('hello!');
+//				inpObj.setCustomValidity('hello!');			/* set customer validation message (optional) */
 				
 				/* display validation message to screen */
-				document.getElementById('out').innerHTML+='<span class="red">Input '+x+' - '+inpObj.validationMessage+'</span><br>';
+				document.getElementById('output').innerHTML+='<span class="red">Input '+x+' - '+inpObj.validationMessage+'</span><br>';
 
+				/* display validation message to console */
 				console.log('Input '+x+' - validationMessage: \n'+inpObj.validationMessage);
-				console.dir(inpObj.validity);
+				console.dir(inpObj.validity);				/* display the validity property to console */
 				console.dir('---------------------------');
-			} else {
-				good+=1;
-				document.getElementById('out').innerHTML+= '<span class="blue">Input '+x+' - Input OK</span><br>';
+			} else {										/* if found valid */
+				good+=1;									/* increment the counter */
+				/* display message to screen */
+				document.getElementById('output').innerHTML+= '<span class="blue">Input '+x+' - Input OK</span><br>';
+				/* display message to console */
 				console.log('Input '+x+' - validationMessage: \n'+inpObj.validationMessage);
-				console.dir(inpObj.validity);
+				console.log(inpObj.validationMessage);
+				console.log(inpObj.willValidate);
+				console.dir(inpObj.validity);				/* display the validity property to console */
 				console.dir('---------------------------');
 			}
-			if (good===4) {
-				document.getElementById('out').innerHTML= 'Inputs all good!!!';
-				console.clear();
+			if (good===4) {									/* all valid */
+				/* display message to screen */
+				document.getElementById('output').innerHTML= 'Inputs all good!!!';
+				console.clear();							/* clear the console */
 			}
 		}
-		return false;
+		return false;										/* return false to onSubmt */
 	}
 
 	</script>
