@@ -2,49 +2,66 @@
 <!-- Program: pract1.html -->
 <!-- Author: Andy Pak, Sheridan College -->
 <!-- Date: Nov, 2020 -->
-<!-- Worksheet 11 -->
 <html lang='en'>
-	<head>
-		<title>Form Validataion</title>
-		<meta charset="utf-8" />
-		<style>
-			body { background-color: rgb(195, 230, 241);}
-			form { float: left; font-size: 1.2em; margin-left: 1em; }
-			p { margin: 0.4em 0; }
-		</style>
-	</head>
-	<body>
-		<h3 style="margin-left: 2em;">Form Validation</h3>
-		<form name="form1" method="get" action="nonexist.php">
-			<main>
-				<fieldset> 
-					<legend>Inputs:</legend>
-					Name (text): <input type="text" value="Andy Pak" name="uname" required>
-					<p>Password (password): <input type="password" name="pass" required autofocus></p>
-					<fieldset>
-						<legend>Hobby</legend>
-						<p>Fishing:<input type="checkbox" name="habit1" checked></p>
-						<p>Reading:<input type="checkbox" name="habit2"></p>
-						<p>Singing:<input type="checkbox" name="habit3" checked></p>
-					</fieldset>
-					<fieldset>
-						<legend>Other Info.</legend>
-						<p>Number (number): <input type="number"></p>
-						<p>Range (range): <input type="range" name="slide" min=10 max=90 value=80></p>
-						<p>Email (email): <input type="email" placeholder="this is the placeholder" name="email"></p>
-						<p>url (url): <input type="url"></p>
-						<p>Date of birth: <input type="date"></p>
-					</fieldset>
-				</fieldset>
-			</main>
-			<main>
+<head>
+	<title>Form Validataion</title>
+	<meta charset="utf-8" />
+	<style>
+		body { background-color: rgb(195, 230, 241);}
+		#f1 { float: left; font-size: 1.2em; margin-left: 1em; }
+		p { margin: 0.4em 0; }
+		.left { float: left; }	
+		.right { float: right; }
+	</style>
+</head>
+<body>
+	<h3 style="margin-left: 2em;">Form Validation</h3>
+	<form id="f1" name="form1" method="get" action="nonexist.php">
+		<main class='left'>
+			<fieldset> 
+				<legend>Section A:</legend>
+				<p><label for='in1'>Name (text)</label>&nbsp;&nbsp;
+				<input type="text" id='in1' value="Andy Pak" name="uname" autofocus required></p>
+				<p><label for='in2'>Password (password):</label>&nbsp;&nbsp;
+				<input type="password" id='in2' name="pass" required autofocus></p>
 				<fieldset>
-					<div>
-						<p class='left'>Submit (submit): <input type="submit"></p>
-						<p class='right'> Reset (reset): <input type="reset" value="Start over"></p>
-					</div>
-				</fieldset>	
-			</main>
-		</form>
-	</body>
+					<legend>Checkboxes</legend>
+					<p>Fishing:<input type="checkbox" name="habit1" checked></p>
+					<p>Reading:<input type="checkbox" name="habit2"></p>
+					<p>Singing:<input type="checkbox" name="habit3" checked></p>
+				</fieldset>
+				<fieldset>
+					<legend>Radio Buttons</legend>
+					<p>Take Bus:<input type="radio" name="it"></p>
+					<p>Take Plane:<input type="radio" name="it" checked></p>
+					<p>Walk:<input type="radio" name="it"></p>
+				</fieldset>
+			</fieldset>
+		</main>
+			
+		<main class='right'>
+			<fieldset>
+				<legend>Section B:</legend>
+				<p><label for='in3'>Membership Date:</label>&nbsp;&nbsp;
+					<input type="date" id='in3'></p>
+				<p>Phone Number (number):</p>
+				<p><label for='in4a'>Area Code:</label>&nbsp;
+					( <input id='in4a' type="text" pattern="[0-9]{3}" size="3" required> )
+				<label for='in4b'>Prefix:</label>&nbsp;
+					<input id='in4b' type="text" pattern="[0-9]{3}" size="3" required>
+				<label for='in4c'>Subscriber:</label>&nbsp;
+					<input id='in4c' type="text" pattern="[0-9]{4}" size="4" required></p>
+				<p>Range (range): <input type="range" name="slide" min=10 max=90 value=80></p>
+				<p><label for='in5'>Email (email):</label>&nbsp;&nbsp;
+					<input id='in5' type="email" placeholder="this is the placeholder" name="email"></p>
+				<p><label for='in6'>url (url):</label>&nbsp;&nbsp;
+					<input id='in6' type="url"></p><br><hr><br>
+				<div>
+					<p>Submit (submit): <input type="submit"></p>
+					<p> Reset (reset): <input type="reset" value="Start over"></p>
+				</div>
+			</fieldset>
+		</main>
+	</form>
+</body>
 </html>
